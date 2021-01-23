@@ -14,9 +14,9 @@ public class DebugExercise2 {
 
         //int max = b & w | a & z;
         //return max;
-        int max=b;
-        if (a>=b){
-            max=a;
+        int max = b;
+        if (a >= b) {
+            max = a;
             return max;
         }
         return max;
@@ -28,7 +28,7 @@ public class DebugExercise2 {
       * by stepping over, not into. */    
     public static int add(int a, int b) {
         int add;
-        add=a+b;
+        add = a + b;
         return add;
         //int x = a, y = b;
         /* If you're stepping into this function, click the
