@@ -5,7 +5,7 @@ public class LinkedListDeque<T> {
     private DLList sentBack = new DLList(null, null, null);
     private DLList gr = sentFront;
 
-    private class DLList {
+    public class DLList {
         private T item;
         private DLList prev, next;
         public DLList(T x, DLList pre, DLList n) {
@@ -25,14 +25,14 @@ public class LinkedListDeque<T> {
         sentBack.prev = sentFront.next;
         size = 1;
     }
-    private void addFirst(T item) {
+    public void addFirst(T item) {
         DLList semi = new DLList(item, sentFront, sentFront.next);
         DLList sfn = sentFront.next;
         sfn.prev = semi;
         sentFront.next = semi;
         size = size + 1;
     }
-    private void addLast(T item) {
+    public void addLast(T item) {
 
         DLList semi = new DLList(item, sentBack.prev, sentBack);
         DLList sbp = sentBack.prev;
@@ -55,7 +55,7 @@ public class LinkedListDeque<T> {
             i = i + 1;
         }
     }
-    private T removeFirst() {
+    public T removeFirst() {
         if (size == 0) {
             return null;
         }
@@ -66,7 +66,7 @@ public class LinkedListDeque<T> {
         size = size - 1;
         return firstRemove.item;
     }
-    private T removeLast() {
+    public T removeLast() {
         if (size == 0) {
             return null;
         }
@@ -77,7 +77,7 @@ public class LinkedListDeque<T> {
         size = size - 1;
         return lastRemove.item;
     }
-    private T get(int index) {
+    public T get(int index) {
         if ((index + 1) > size) {
             return null;
         }
@@ -89,7 +89,7 @@ public class LinkedListDeque<T> {
         }
         return getindex.item;
     }
-    private T getRecursive(int index) {
+    public T getRecursive(int index) {
 
         if ((index + 1) > size) {
             return null;
