@@ -11,9 +11,12 @@ public class ArrayDeque<T> {
 
     public ArrayDeque() {
         size = 0;
-        arrDe = (T[])new Object[8];
+        arrDe = (T[]) new Object[8];
     }
     private void resize(int capacity, int position, int position1) {
+        if (capacity <= 16){
+            capacity = 16;
+        }
         T[] a = (T[]) new Object[capacity];
         System.arraycopy(arrDe, position, a, position1, size);
         arrDe = a;
@@ -37,9 +40,11 @@ public class ArrayDeque<T> {
     public T removeFirst() {
         T rf = arrDe[0];
         size = size - 1;
+        int rfs = arrDe.length;
         if ((size <= (arrDe.length * 0.25)) && (arrDe.length >= 16)) {
-            resize(size * factor, 1, 0);
+            rfs = size * factor;
         }
+        resize(rfs, 1, 0);
         return rf;
     }
     public T removeLast() {
@@ -59,7 +64,7 @@ public class ArrayDeque<T> {
     }
     public void printDeque() {
         int i = 0;
-        while (i < size){
+        while (i < size) {
             System.out.println(arrDe[i]);
             i = i + 1;
         }

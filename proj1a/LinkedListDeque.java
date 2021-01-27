@@ -5,7 +5,7 @@ public class LinkedListDeque<T> {
     private DLList sentBack = new DLList(null, null, null);
     private DLList gr = sentFront;
 
-    public class DLList {
+    private class DLList {
         private T item;
         private DLList prev, next;
         public DLList(T x, DLList pre, DLList n) {
@@ -32,14 +32,14 @@ public class LinkedListDeque<T> {
         sentFront.next = semi;
         size = size + 1;
     }
-    public void addLast(T item) {
+    /** public void addLast(T item) {
 
         DLList semi = new DLList(item, sentBack.prev, sentBack);
         DLList sbp = sentBack.prev;
         sbp.next = semi;
         sentBack.prev = semi;
         size = size + 1;
-    }
+    }*/
     public boolean isEmpty() {
         return size == 0;
     }
@@ -83,7 +83,7 @@ public class LinkedListDeque<T> {
         }
         int i = 0;
         DLList getindex = sentFront;
-        while (i <= index){
+        while (i <= index) {
             getindex = getindex.next;
             i = i + 1;
         }
