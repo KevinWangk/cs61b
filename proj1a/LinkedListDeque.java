@@ -1,44 +1,38 @@
-/**
- * DLList
- *
- * @author Wangkun
- * @create 2021-01-26-21:47
- **/
-public class LinkedListDeque<GeneList> {
+public class LinkedListDeque<T> {
     private int size = 0;
     private DLList sentinel;
-    private DLList sentFront = new DLList(null,null,null);
-    private DLList sentBack = new DLList(null,null,null);
+    private DLList sentFront = new DLList(null, null, null);
+    private DLList sentBack = new DLList(null, null, null);
     private DLList gr = sentFront;
 
-    public class DLList{
-        public GeneList item;
-        public DLList prev, next;
-        public DLList(GeneList x, DLList pre, DLList n){
+    private class DLList {
+        private T item;
+        private DLList prev, next;
+        public DLList(T x, DLList pre, DLList n) {
             item = x;
             prev = pre;
             next = n;
         }
     }
-    public LinkedListDeque(){
+    public LinkedListDeque() {
         size = 0;
         sentFront.next = sentBack;
         sentBack.prev = sentFront;
     }
-    public LinkedListDeque(GeneList item){
+    public LinkedListDeque(T item) {
 
         sentFront.next = new DLList(item, sentFront, sentBack);
         sentBack.prev = sentFront.next;
         size = 1;
     }
-    public void addFirst(GeneList item){
+    private void addFirst(T item) {
         DLList semi = new DLList(item, sentFront, sentFront.next);
         DLList sfn = sentFront.next;
         sfn.prev = semi;
         sentFront.next = semi;
         size = size + 1;
     }
-    public void addLast(GeneList item){
+    private void addLast(T item) {
 
         DLList semi = new DLList(item, sentBack.prev, sentBack);
         DLList sbp = sentBack.prev;
@@ -46,23 +40,23 @@ public class LinkedListDeque<GeneList> {
         sentBack.prev = semi;
         size = size + 1;
     }
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return size == 0;
     }
     public int size() {
         return size;
     }
-    public void printDeque(){
+    public void printDeque() {
         int i = 0;
         DLList pd = sentFront;
-        while (i < size){
+        while (i < size) {
             System.out.print(" " + pd.next.item + " ");
             pd = pd.next;
             i = i + 1;
         }
     }
-    public GeneList removeFirst(){
-        if (size == 0){
+    private T removeFirst() {
+        if (size == 0) {
             return null;
         }
         DLList firstRemove = sentFront.next;
@@ -71,10 +65,9 @@ public class LinkedListDeque<GeneList> {
         sfnn.prev = sentFront;
         size = size - 1;
         return firstRemove.item;
-
     }
-    public GeneList removeLast(){
-        if (size == 0){
+    private T removeLast() {
+        if (size == 0) {
             return null;
         }
         DLList lastRemove = sentBack.prev;
@@ -84,8 +77,8 @@ public class LinkedListDeque<GeneList> {
         size = size - 1;
         return lastRemove.item;
     }
-    public GeneList get(int index){
-        if ((index + 1) > size){
+    private T get(int index) {
+        if ((index + 1) > size) {
             return null;
         }
         int i = 0;
@@ -96,13 +89,13 @@ public class LinkedListDeque<GeneList> {
         }
         return getindex.item;
     }
-    public GeneList getRecursive(int index){
+    private T getRecursive(int index) {
 
-        if ((index + 1) > size){
+        if ((index + 1) > size) {
             return null;
         }
-        if (index == 0){
-            GeneList gene = gr.next.item;
+        if (index == 0) {
+            T gene = gr.next.item;
             gr = sentFront;
             return gene;
         }
