@@ -9,7 +9,8 @@ public class LinkedListDeque<GeneList> {
     private DLList sentinel;
     private DLList sentFront = new DLList(null,null,null);
     private DLList sentBack = new DLList(null,null,null);
-    private DLList gr;
+    private DLList gr = sentFront;
+
     public class DLList{
         public GeneList item;
         public DLList prev, next;
@@ -25,54 +26,65 @@ public class LinkedListDeque<GeneList> {
         sentBack.prev = sentFront;
     }
     public LinkedListDeque(GeneList item){
+
         sentFront.next = new DLList(item, sentFront, sentBack);
         sentBack.prev = sentFront.next;
         size = 1;
     }
     public void addFirst(GeneList item){
-        sentFront.next.prev = new DLList(item, sentFront, sentFront.next);
-        sentFront.next = sentFront.next.prev;
+        DLList semi = new DLList(item, sentFront, sentFront.next);
+        DLList sfn = sentFront.next;
+        sfn.prev = semi;
+        sentFront.next = semi;
         size = size + 1;
-        gr = sentFront;
     }
     public void addLast(GeneList item){
-        sentBack.prev.next = new DLList(item, sentBack.prev, sentBack);
-        sentBack.prev = sentBack.prev.next;
+
+        DLList semi = new DLList(item, sentBack.prev, sentBack);
+        DLList sbp = sentBack.prev;
+        sbp.next = semi;
+        sentBack.prev = semi;
         size = size + 1;
     }
     public boolean isEmpty(){
-        return size != 0;    //if size = 0, then 0 != 0 is false;
-                             // if size > 0,then proper int > 0 is true;
+        return size == 0;
     }
     public int size() {
         return size;
     }
     public void printDeque(){
-
+        int i = 0;
+        DLList pd = sentFront;
+        while (i < size){
+            System.out.print(" " + pd.next.item + " ");
+            pd = pd.next;
+            i = i + 1;
+        }
     }
-    public DLList removeFirst(){
+    public GeneList removeFirst(){
         if (size == 0){
             return null;
         }
-        DLList firstRemove;
-        firstRemove = sentFront.next;
-        sentFront.next = sentFront.next.next;
-        sentFront.next.prev = sentFront;
-        gr = sentFront;
-        return firstRemove;
+        DLList firstRemove = sentFront.next;
+        DLList sfnn = sentFront.next.next;
+        sentFront.next = sfnn;
+        sfnn.prev = sentFront;
+        size = size - 1;
+        return firstRemove.item;
 
     }
-    public DLList removeLast(){
+    public GeneList removeLast(){
         if (size == 0){
             return null;
         }
-        DLList lastRemove;
-        lastRemove = sentBack.prev;
-        sentBack.prev = sentBack.prev.prev;
-        sentBack.prev.next = sentBack;
-        return lastRemove;
+        DLList lastRemove = sentBack.prev;
+        DLList sbpp = sentBack.prev.prev;
+        sbpp.next = sentBack;
+        sentBack.prev = sbpp;
+        size = size - 1;
+        return lastRemove.item;
     }
-    public DLList get(int index){
+    public GeneList get(int index){
         if ((index + 1) > size){
             return null;
         }
@@ -82,19 +94,20 @@ public class LinkedListDeque<GeneList> {
             getindex = getindex.next;
             i = i + 1;
         }
-        return getindex;
+        return getindex.item;
     }
-    public DLList getRecursive(int index){
+    public GeneList getRecursive(int index){
+
         if ((index + 1) > size){
             return null;
         }
         if (index == 0){
-            return gr.next;
-        } else{
-            gr = gr.next;
-            return getRecursive(index - 1);
+            GeneList gene = gr.next.item;
+            gr = sentFront;
+            return gene;
         }
-
+        gr = gr.next;
+        return getRecursive(index - 1);
     }
 
 }
