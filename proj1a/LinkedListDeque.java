@@ -19,12 +19,14 @@ public class LinkedListDeque<T> {
         sentFront.next = sentBack;
         sentBack.prev = sentFront;
     }
+    /**
     public LinkedListDeque(T item) {
 
         sentFront.next = new DLList(item, sentFront, sentBack);
         sentBack.prev = sentFront.next;
         size = 1;
     }
+     */
     public void addFirst(T item) {
         DLList semi = new DLList(item, sentFront, sentFront.next);
         DLList sfn = sentFront.next;
@@ -32,14 +34,14 @@ public class LinkedListDeque<T> {
         sentFront.next = semi;
         size = size + 1;
     }
-    /** public void addLast(T item) {
+     public void addLast(T item) {
 
         DLList semi = new DLList(item, sentBack.prev, sentBack);
         DLList sbp = sentBack.prev;
         sbp.next = semi;
         sentBack.prev = semi;
         size = size + 1;
-    }*/
+    }
     public boolean isEmpty() {
         return size == 0;
     }
