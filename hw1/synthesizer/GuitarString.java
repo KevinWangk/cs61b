@@ -1,4 +1,4 @@
-package synthesizer;// TODO: Make sure to make this class a part of the synthesizer package
+package synthesizer;
 //package <package name>;
 
 //Make sure this class is public
@@ -39,7 +39,7 @@ public class GuitarString {
 
     /* Return the double at the front of the buffer. */
     public double sample() {
-        // TODO: Return the correct thing.
+
         return buffer.peek();
     }
 }
