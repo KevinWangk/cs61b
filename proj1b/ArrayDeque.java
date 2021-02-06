@@ -4,7 +4,7 @@
  * @author Wangkun
  * @create 2021-01-27-11:56
  **/
-public class ArrayDeque<T> {
+public class ArrayDeque<T> implements Deque<T> {
     private final int factor = 2;
     private int size = 0;
     private T[] arrDe;
@@ -21,6 +21,7 @@ public class ArrayDeque<T> {
         System.arraycopy(arrDe, position, a, position1, size);
         arrDe = a;
     }
+    @Override
     public void addFirst(T item) {
         int al = arrDe.length;
         if (size == arrDe.length) {
@@ -30,6 +31,7 @@ public class ArrayDeque<T> {
         arrDe[0] = item;
         size = size + 1;
     }
+    @Override
     public void addLast(T item) {
         if (size == arrDe.length) {
             resize(size * factor, 0, 0);
@@ -37,6 +39,7 @@ public class ArrayDeque<T> {
         arrDe[size] = item;
         size = size + 1;
     }
+    @Override
     public T removeFirst() {
         T rf = arrDe[0];
         size = size - 1;
@@ -47,6 +50,7 @@ public class ArrayDeque<T> {
         resize(rfs, 1, 0);
         return rf;
     }
+    @Override
     public T removeLast() {
         T reLast = arrDe[size - 1];
         arrDe[size - 1] = null;
@@ -56,9 +60,11 @@ public class ArrayDeque<T> {
         }
         return reLast;
     }
+    @Override
     public int size() {
         return size;
     }
+    @Override
     public boolean isEmpty() {
         return size == 0;
     }
@@ -70,6 +76,7 @@ public class ArrayDeque<T> {
         }
 
     }
+    @Override
     public T get(int index) {
         if ((index + 1) > size) {
             return null;
